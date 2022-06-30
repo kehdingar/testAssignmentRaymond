@@ -3,9 +3,11 @@ $pageTitle = "List Products";
 include_once "includes/header.php";
 ?>
     <header>
-        <p><?= $pageTitle ?></p>
+        <p><?= "Product List" ?></p>
     </header>
+
 <div class="products">
+
 
 </div>
 
