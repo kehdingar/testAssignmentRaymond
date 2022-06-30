@@ -1,0 +1,55 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+
+
+*{
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+}
+html {
+    max-height: 100vh;
+}
+
+body {
+    font-family: 'Oxygen', sans-serif;    
+    font-weight: 300;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+  }
+
+  .page-wrapper {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  footer {
+    /* Set the fixed height of the footer here */
+    position: absolute;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    bottom:0;
+    width: 100%;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+  }
+  
+
+  /* Custom page CSS
+  -------------------------------------------------- */
+  /* Not required for template or sticky footer method. */
+
+
+header {
+    font-family: 'Oxygen', sans-serif;    
+    font-size: 3rem;
+    font-weight:700;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #c94242;
+
+}
+
