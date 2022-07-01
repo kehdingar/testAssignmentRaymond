@@ -2,8 +2,11 @@
 
 class DVDDisc extends Product
 {
+
     private int $size = 0;
     private string $sizeUnit = "MB";
+    public static string $frontEndName = "DVD-disk";
+
 
     public function __construct()
     {
@@ -33,6 +36,11 @@ class DVDDisc extends Product
     public function getFieldsInfo(): array
     {
         return array_unique($this->formFields);
+    }
+
+    public static function getFrontEndName(): string
+    {
+        return self::$frontEndName;
     }
 
 }

@@ -1,10 +1,13 @@
 <?php
 
+
+require_once "Product.php";
+
 class Book extends Product
 {
     protected int $weight = 0;
     private string $weightUnit = "Kg";
-    private array $formFields = array();
+    private static string  $frontEndName = "Book";
 
     public function __construct()
     {
@@ -34,6 +37,11 @@ class Book extends Product
     public function getFieldsInfo(): array
     {
         return array_unique($this->formFields);
+    }
+
+    public static function getFrontEndName(): string
+    {
+        return self::$frontEndName;
     }
 
 }

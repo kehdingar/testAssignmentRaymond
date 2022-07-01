@@ -16,6 +16,9 @@ abstract class Product
 
     public abstract function getFormFieldInfo($field): string;
 
+    public abstract static function getFrontEndName(): string;
+   
+
     public function fieldGenerator(array $formFields): string
     {
         foreach ($formFields as $field => $unit) 
@@ -33,21 +36,6 @@ abstract class Product
         }
         return $this->generatedFields;
     }
-
-    public static function getProductTypes(): array
-    {
-        foreach(get_declared_classes() as $type)
-        {
-            if($type instanceof Product){
-                self::$productTypes = $type;
-                echo $type;
-            }
-        }
-
-        return array($type);
-        // return array('Proudct1','Product 2','Product 3');
-    }
-
 
 }
 

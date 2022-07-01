@@ -8,6 +8,8 @@ class Furniture extends Product
     private string $heightUnit = "CM";
     private string $widthUnit = "CM";
     private string $lenthUnit = "CM";
+    private static string $frontEndName = "Furniture";
+
 
     public function __construct()
     {
@@ -42,6 +44,12 @@ class Furniture extends Product
     {
         return array_unique($this->formFields);
     }
+
+    public static function getFrontEndName(): string
+    {
+        return self::$frontEndName;
+    }
+
 }
 
 ?>
