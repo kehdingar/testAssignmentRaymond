@@ -1,6 +1,6 @@
 <?php
 
-abstract class Product
+abstract class ProductManager
 {
     protected string $generatedFields = "";
     // private $formFields = array('size','weight');
