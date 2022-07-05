@@ -26,7 +26,7 @@ body {
     justify-content: space-between;
   }
 
-  #rightMenu a{
+  #rightMenu > *{
     padding:0 0.5rem;
     margin:0 0 0.3rem 1rem;
     line-height: 2;
@@ -116,7 +116,6 @@ body {
     min-height:calc(100vh - calc(var(--footer-height) + 40px));
     margin: 2rem 4rem;
     border-bottom: 3px solid #c94242 ;
-
   }
 
   footer {
@@ -157,6 +156,11 @@ header p{
     100% {
         opacity: 1;
      }
+}
+
+p.error{
+  color:#e30000;
+  font-size: 14px;
 }
 
 

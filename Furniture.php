@@ -2,53 +2,72 @@
 
 class Furniture extends Product
 {
-    private int $height = 0;
-    private int $width = 0;
-    private int $length = 0;
+    protected int $height = 0;
+    protected int $width = 0;
+    protected int $length = 0;
     private string $heightUnit = "CM";
     private string $widthUnit = "CM";
-    private string $lenthUnit = "CM";
-    private static string $frontEndName = "Furniture";
+    private string $lengthUnit = "CM";
+    private static string $name = "Furniture";
 
 
     public function __construct()
     {
-        $height = $this->height;
-        $width = $this->width;
-        $length = $this->length;
+
         $this->formFields = [
-            $$height => $this->heightUnit,
-            $$width => $this->widthUnit,
-            $$length => $this->lenthUnit
+            "height" => $this->heightUnit,
+            "width" => $this->widthUnit,
+            "length" => $this->lengthUnit
         ];
+        
 
-        $this->fieldGenerator($this->formFields);
+    }
 
-
+    public function generatedFields(): string{
+        // Generated fields in Parent
+        return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
 
     public function getFormFieldInfo($field): string
     {
         $field = ucfirst($field); 
-        $methodToCall = "get$field";
-
-        return $methodToCall();
+        $methodToCall = "get$field"."Info";
+        $info = $methodToCall;
+        return $info;
     }
 
-    public function getSizeInfo()
-    {
-        return "Please provide Dimensions in ". $this->heightUnit;
-    }
 
     public function getFieldsInfo(): array
     {
-        return array_unique($this->formFields);
+        return array_unique($this->formFieldsInfo);
     }
 
-    public static function getFrontEndName(): string
+    public function getGeneratedFields(): string
     {
-        return self::$frontEndName;
+        return $this->generatedFields;
     }
+
+    public function getHeightInfo(): string
+    {
+        return "Please, Dimensions: LxWxH in " .$this->heightUnit;
+    }
+
+    public function getWidthInfo(): string
+    {
+        return "Please, Dimensions: LxWxH  " .$this->widthUnit;
+    }
+
+    public function getLengthInfo(): string
+    {
+        return "Please, Dimensions: LxWxH " .$this->lengthUnit;
+    }
+
+    public static function getName(): string
+    {
+        return self::$name;
+    }
+
+    
 
 }
 

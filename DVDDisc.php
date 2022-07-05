@@ -3,45 +3,53 @@
 class DVDDisc extends Product
 {
 
-    private int $size = 0;
+    protected int $size = 0;
     private string $sizeUnit = "MB";
-    public static string $frontEndName = "DVD-disk";
+    public static string $name = "DVD-disk";
 
 
     public function __construct()
     {
-        $size = $this->size;
         $this->formFields = [
-            $$size => $this->sizeUnit
+            "size" => $this->sizeUnit
         ];
+        
+    }
 
-        $this->fieldGenerator($this->formFields);
-
-
+    public function generatedFields(): string{
+        // Generated fields in Parent
+        return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
 
     public function getFormFieldInfo($field): string
     {
         $field = ucfirst($field); 
-        $methodToCall = "get$field";
-
-        return $methodToCall();
+        $methodToCall = "get$field"."Info";
+        $info = $methodToCall;
+        return $info;
     }
 
     public function getSizeInfo()
     {
-        return "Please provide disk space in ". $this->sizeUnit;
+        return "Please, provide disk space in ". $this->sizeUnit;
     }
 
     public function getFieldsInfo(): array
     {
-        return array_unique($this->formFields);
+        return array_unique($this->formFieldsInfo);
     }
 
-    public static function getFrontEndName(): string
+    public function getGeneratedFields(): string
     {
-        return self::$frontEndName;
+        return $this->generatedFields;
     }
+
+    public static function getName(): string
+    {
+        return self::$name;
+    }
+
+    
 
 }
 ?>

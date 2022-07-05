@@ -7,41 +7,62 @@ class Book extends Product
 {
     protected int $weight = 0;
     private string $weightUnit = "Kg";
-    private static string  $frontEndName = "Book";
+    private static string  $name = "Book";
+    protected array $formFields = array();
+    // private string $generatedFields = "";
 
     public function __construct()
     {
-        $weight = $this->weight;
+        
         $this->formFields = [
-            $$weight => $this->weightUnit
+            "weight" => $this->weightUnit
         ];
 
-        $this->fieldGenerator($this->formFields);
+        
 
     }
 
+    public function generatedFields(): string{
+        // Generated fields in Parent
+        return $this->generatedFields = $this->fieldGenerator($this->formFields);
+    }
 
     public function getFormFieldInfo($field): string
     {
         $field = ucfirst($field); 
-        $methodToCall = "get$field";
-
-        return $methodToCall();
+        $methodToCall = "get$field"."Info";
+        $info = $methodToCall;
+        return $info;
     }
-
-    public function getWeightInfo()
+    
+    public function getWeightInfo(): string
     {
-        return "Please provide weight in ". $this->weightUnit;
+        return "Please, provide weight in " .$this->weightUnit;
     }
 
     public function getFieldsInfo(): array
     {
-        return array_unique($this->formFields);
+        return array_unique($this->formFieldsInfo);
     }
 
-    public static function getFrontEndName(): string
+    public function getFormFields(): array
     {
-        return self::$frontEndName;
+        return $this->formFields;
+    }
+
+    public function getGeneratedFields(): string
+    {
+        return $this->generatedFields;
+    }
+
+    public static function getName(): string
+    {
+        return self::$name;
+    }
+
+    public function getWeight(): int
+    {
+        return $this->weight;
     }
 
 }
