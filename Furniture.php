@@ -10,7 +10,6 @@ class Furniture extends Product
     private string $lengthUnit = "CM";
     private static string $displayName = "Furniture";
 
-
     public function __construct()
     {
 
@@ -19,47 +18,22 @@ class Furniture extends Product
             "width" => $this->widthUnit,
             "length" => $this->lengthUnit
         ];
-        
-
     }
 
-    public function generatedFields(): string{
+    public function generatedFields(): string
+    {
         // Generated fields in Parent
         return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
 
-    public function getFormFieldInfo($field): string
+    public function getdescriptionMessage(): string
     {
-        $field = ucfirst($field); 
-        $methodToCall = "get$field"."Info";
-        $info = $methodToCall;
-        return $info;
-    }
-
-
-    public function getFieldsInfo(): array
-    {
-        return array_unique($this->formFieldsInfo);
+        return "Please, provide dimensions: HxWxL in " . $this->heightUnit;
     }
 
     public function getGeneratedFields(): string
     {
         return $this->generatedFields;
-    }
-
-    public function getHeightInfo(): string
-    {
-        return "Please, Dimensions: LxWxH in " .$this->heightUnit;
-    }
-
-    public function getWidthInfo(): string
-    {
-        return "Please, Dimensions: LxWxH  " .$this->widthUnit;
-    }
-
-    public function getLengthInfo(): string
-    {
-        return "Please, Dimensions: LxWxH " .$this->lengthUnit;
     }
 
     public static function getDisplayName(): string
@@ -69,10 +43,10 @@ class Furniture extends Product
 
     public function setHeight($height)
     {
-        if($height == null){
+        if ($height == null) {
 
             $this->height = 0;
-        }else{
+        } else {
 
             $this->height = $height;
         }
@@ -85,10 +59,10 @@ class Furniture extends Product
 
     public function setWidth($width)
     {
-        if($width == null){
+        if ($width == null) {
 
             $this->width = 0;
-        }else{
+        } else {
 
             $this->width = $width;
         }
@@ -101,10 +75,10 @@ class Furniture extends Product
 
     public function setLength($length)
     {
-        if($length == null){
+        if ($length == null) {
 
             $this->length = 0;
-        }else{
+        } else {
 
             $this->length = $length;
         }
@@ -114,8 +88,4 @@ class Furniture extends Product
     {
         return $this->length;
     }
-    
-
 }
-
-?>

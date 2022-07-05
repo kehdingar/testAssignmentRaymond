@@ -4,7 +4,6 @@ include_once "DbConfig.php";
 class Crud
 {
     private $conn;
-
     public function __construct()
     {
         $this->conn = getDbConnection();
@@ -12,8 +11,8 @@ class Crud
 
     public function create($dataArray, $table)
     {
-        $columns = implode(',',array_keys($dataArray));
-        $placeHolders = ':' .implode(',:',array_keys($dataArray));
+        $columns = implode(',', array_keys($dataArray));
+        $placeHolders = ':' . implode(',:', array_keys($dataArray));
 
         $sql = "INSERT INTO $table ($columns) VALUES ($placeHolders)";
         $stmt = $this->conn->prepare($sql);
@@ -35,7 +34,4 @@ class Crud
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
     }
-
 }
-
-?>

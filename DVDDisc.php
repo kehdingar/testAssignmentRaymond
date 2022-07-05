@@ -7,36 +7,23 @@ class DVDDisc extends Product
     private string $sizeUnit = "MB";
     public static string $displayName = "DVD-disk";
 
-
     public function __construct()
     {
         $this->formFields = [
             "size" => $this->sizeUnit
         ];
-        
     }
 
-    public function generatedFields(): string{
+    public function generatedFields(): string
+    {
         // Generated fields in Parent
         return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
 
-    public function getFormFieldInfo($field): string
-    {
-        $field = ucfirst($field); 
-        $methodToCall = "get$field"."Info";
-        $info = $methodToCall;
-        return $info;
-    }
 
-    public function getSizeInfo()
+    public function getdescriptionMessage(): string
     {
-        return "Please, provide disk space in ". $this->sizeUnit;
-    }
-
-    public function getFieldsInfo(): array
-    {
-        return array_unique($this->formFieldsInfo);
+        return "Please, provide disk space in " . $this->sizeUnit;
     }
 
     public function getGeneratedFields(): string
@@ -51,10 +38,10 @@ class DVDDisc extends Product
 
     public function setSize($size)
     {
-        if($size == null){
-            
+        if ($size == null) {
+
             $this->size = 0;
-        }else{
+        } else {
 
             $this->size = $size;
         }
@@ -64,7 +51,9 @@ class DVDDisc extends Product
     {
         return $this->size;
     }
-    
 
+    public function getSizeUnit(): string
+    {
+        return $this->sizeUnit;
+    }
 }
-?>

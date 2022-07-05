@@ -4,19 +4,25 @@ require_once "Product.php";
 require_once "DVDDisc.php";
 require_once "Book.php";
 require_once "Furniture.php";
-require_once "Crud.php";
+include_once "Crud.php";
 
 class ProductController
 {
     private Product $type;
+    private $crud;
     private array $validation_data = array();
     private array $validationRules = array();
     private array $productData = array();
     private array $bookData = array();
     private array $furnitureData = array();
     private array $dvdDiscData = array();
+    private array $productIds = array();
 
 
+    public function __construct()
+    {
+        $this->crud = new Crud;
+    }
 
     public function setType(Product $type)
     {
@@ -27,16 +33,16 @@ class ProductController
     {
         return $this->type;
     }
-    
+
 
     public function getProductHTML()
     {
-       return $this->type->generatedFields();
+        return $this->type->generatedFields();
     }
 
-    public function getFieldsInfo()
+    public function getDescriptionMessage()
     {
-        return $this->type->getFieldsInfo();
+        return $this->type->getDescriptionMessage();
     }
 
     public function addProduct()
@@ -44,20 +50,17 @@ class ProductController
 
         $this->validationRules = [
             'type' => 'type',
-            'sku' => 'required',
+            'sku' => 'sku',
             'name' => 'required',
             'price' => 'number'
         ];
 
-        // $type = $_POST['type'];
-        // var_dump($_POST['sku']);
-        // die();
 
         Product::setType($_POST['type']);
         Product::setName($_POST['name']);
         Product::setSku($_POST['sku']);
-        Product::setPrice(json_decode($_POST['price']),true);
-        
+        Product::setPrice(json_decode($_POST['price']), true);
+
         // Keys matching database columns
         $this->productData = [
             'sku' => Product::getSku(),
@@ -68,87 +71,68 @@ class ProductController
 
 
         $this->validation_data = $this->productData;
-        // array_push($validation_data,['switcher' => $switcher]);
-        if(Product::getType() != '' && in_array(Product::getType(),Product::getChildren())){
+        if (Product::getType() != '' && in_array(Product::getType(), Product::getChildren())) {
             $type = Product::getType();
             $this->setType(new $type);
             $productMethodToCall = "add$type";
             $productTypeData = $this->$productMethodToCall();
 
             $this->validation_data += $productTypeData;
-         
-                // $this->validation_data += $data;
-
-            // var_dump($productMethodToCall); die();
-           
-        //    foreach ($this->$productMethodToCall()[$switcher] as $key => $value) {
-        //     $this->validation_data += $value;
-        //    }
-
-        //    foreach ($this->$productMethodToCall()['validationRules'] as $key => $value) {
-        //     $this->validation_rules += $value;
-        //    }
-
         }
 
-        $validator = new Validator($this->validation_data,$this->validationRules);
+        $validator = new Validator($this->validation_data, $this->validationRules);
         $validator->validate();
 
-        if($validator->validates()){
-            
-            // $this->crud->create($this->productData,'products')
-            // echo json_encode($response);
-            // header('location:add-product.php');
-            die("No Error");
-            
-            // echo json_encode($response);
-        }else{
-            // header('location:add-product.php');
+        if ($validator->validates()) {
+
+            $productID = $this->crud->create($this->productData, 'product');
+            $productType = Product::getType();
+            $queryMethod = "create$productType";
+            $this->$queryMethod($productID);
+            $response = "redirect";
+            echo json_encode($response);
+        } else {
             $response = $_SESSION;
             echo json_encode($response);
         }
-
     }
 
-    public function addBook(){
+    public function addBook()
+    {
 
         $book = new Book();
 
-        $book->setWeight(json_decode($_POST['weight']),true);
+        $book->setWeight(json_decode($_POST['weight']), true);
 
         $this->bookData += ['weight' => $book->getWeight()];
-
-        // array_push($this->bookData,[
-        //     'weight' => $_POST['weight']
-        // ] );
 
         $this->validationRules += ['weight' => 'number'];
 
         return $this->bookData;
-
     }
 
-    public function addDVDDisc(){
+    public function addDVDDisc()
+    {
 
         $dvdDisc = new DVDDisc();
 
-        $dvdDisc->setSize(json_decode($_POST['size']),true);
+        $dvdDisc->setSize(json_decode($_POST['size']), true);
 
         $this->dvdDiscData += ['size' => $dvdDisc->getSize()];
 
         $this->validationRules += ['size' => 'number'];
 
         return $this->dvdDiscData;
-
     }
 
-    public function addFurniture(){
+    public function addFurniture()
+    {
 
         $furniture = new Furniture();
-        
-        $furniture->setHeight(json_decode($_POST['height']),true);
-        $furniture->setWidth(json_decode($_POST['width']),true);
-        $furniture->setLength(json_decode($_POST['length']),true);
+
+        $furniture->setHeight(json_decode($_POST['height']), true);
+        $furniture->setWidth(json_decode($_POST['width']), true);
+        $furniture->setLength(json_decode($_POST['length']), true);
 
         $this->furnitureData += ['height' => $furniture->getHeight()];
         $this->furnitureData += ['width' => $furniture->getWidth()];
@@ -159,9 +143,43 @@ class ProductController
         $this->validationRules += ['length' => 'number'];
 
         return $this->furnitureData;
-
     }
-   
-}
 
-?>
+
+    public function createBook($productId)
+    {
+        $this->bookData += ['product_id' => $productId];
+        $this->crud->create($this->bookData, 'book');
+    }
+
+    public function createDVDDisc($productId)
+    {
+        $this->dvdDiscData += ['product_id' => $productId];
+        $this->crud->create($this->dvdDiscData, 'dvd_disc');
+    }
+
+    public function createFurniture($productId)
+    {
+        $this->furnitureData += ['product_id' => $productId];
+        $this->crud->create($this->furnitureData, 'furniture');
+    }
+
+    public function setProductIds(array $productIds)
+    {
+        $this->productIds = $productIds;
+    }
+
+    public function getetProductIds()
+    {
+        return $this->productIds;
+    }
+
+    public function deleteProduct()
+    {
+        foreach ($this->productIds as $key => $id) {
+
+            $sql = "DELETE FROM product WHERE id = $id";
+            $this->crud->delete($sql);
+        }
+    }
+}

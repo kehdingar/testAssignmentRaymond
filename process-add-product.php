@@ -8,32 +8,26 @@ Session::start();
 
 
 $productController = new ProductController();
-// var_dump($_GET['selectedType']);
-if(($_SERVER['REQUEST_METHOD'] == 'POST')){
-    
+
+if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+
     $productController->addProduct();
 
     // clearing all errors if page is reloaded
     unset($_SESSION['errors']);
+} else {
+    if (isset($_GET['selectedType']) && !empty($_GET['selectedType'])) {
 
-}else{
-    if(isset($_GET['selectedType']) && !empty($_GET['selectedType'])){
 
+        $productController->setType(new $_GET['selectedType']);
 
-        $productController->setType( new $_GET['selectedType']);
-        
         $productType = $productController->getType();
         $html = $productController->getProductHTML();
-        $response = ["empty" =>false, "html" =>$html,"info" => $productController->getFieldsInfo()];
-        
-        
-        // $response = $_GET['selectedType'] . " is OK";
+        $response = ["empty" => false, "html" => $html, "info" => $productController->getDescriptionMessage()];
+
         echo json_encode($response);
-    }else{
-        $response = ["empty" =>true];
+    } else {
+        $response = ["empty" => true];
         echo json_encode($response);
     }
 }
-
-
-?>

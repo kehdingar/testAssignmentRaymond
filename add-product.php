@@ -1,6 +1,5 @@
 <?php
 
-
 require_once "Session.php";
 require_once "Product.php";
 require_once "ProductController.php";
@@ -12,84 +11,78 @@ Session::start();
 $pageTitle = "Add Product";
 require_once "includes/header.php";
 
-var_dump(isset($_SESSION['errors']));
-
-
 ?>
-<form class="logregform" method="POST">
 
 <header>
-    <p><?php echo "Product Add" ?></p>
+    <span><?php echo "Product Add" ?></span>
     <div id="rightMenu">
-        <button type="submit" class="save add">SAVE</button>
-    <a href="list-products.php" class="mass-delete">CANCEL</a>
+        <a href="#" class="save add">SAVE</a>
+        <a href="list-products.php" class="button-two">CANCEL</a>
     </div>
 </header>
 
-<div class="products">
+<div class="add-product prodcut-area">
 
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label>SKU</label>
-                    <input type="text" name="sku" id="sku" value="" class="form-control">
-                </div>
-                <p id="skuError" class="error">
-                    <?= Validator::getErrorForField('sku') ?>
-                </p>
+    <form id="product_form" method="POST">
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">SKU</label>
+            <div class="col-md-4">
+                <input type="text" name="sku" id="sku" value="" class="form-control">
+            </div>
+            <p id="skuError" class="error">
+                <?= Validator::getErrorForField('sku') ?>
+            </p>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">Name</label>
+            <div class="col-md-4">
+                <input type="text" name="name" id="name" value="" class="form-control">
+            </div>
+            <p id="nameError" class="error">
+                <?= Validator::getErrorForField('name') ?>
+            </p>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-1 col-form-label">Price ($)</label>
+            <div class="col-md-4">
+                <input type="number" name="price" id="price" value="" class="form-control">
+            </div>
+
+            <p id="priceError" class="error ">
+                <?= Validator::getErrorForField('price') ?>
+            </p>
+        </div>
+
+        <div class="input-group mb-8">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="productType">Type Switcher</label>
+            </div>
+
+            <div class="col-md-4">
+                <select class="custom-select form-control" id="productType" name="type">
+                    <option value="">Type Switcher</option>
+
+                    <?php
+
+                    foreach (Product::getChildren() as $type) {
+                    ?>
+                        <option value="<?php echo $type ?>"><?php echo call_user_func($type . "::getDisplayName"); ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
             </div>
         </div>
 
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label>Name</label>
-                    <input type="text" name="name" id="name" value="" class="form-control">
-                </div>
-                <p id="nameError" class="error">
-                    <?= Validator::getErrorForField('name') ?>
-                </p>
-            </div>
-        </div>
+        <p id="typeError" class="error">
+            <?= Validator::getErrorForField('type') ?>
+        </p>
 
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label>Price ($)</label>
-                    <input type="number" name="price" id="price" value="" class="form-control">
-                </div>
-                <p id="priceError" class="error">
-                    <?= Validator::getErrorForField('price') ?>
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label>Type Switcher</label>
-                    <select id="productType" name="type">
-                        <option value="">Type Switcher</option>
-
-                        <?php
-   
-                        foreach (Product::getChildren() as $type) 
-                        {
-                             ?>
-                              <option value="<?php echo $type?>"><?php echo call_user_func($type. "::getDisplayName"); ?></option>
-                        <?php 
-                        }
-                        ?>
-                    </select>
-                </div>
-                <p id="typeError" class="error">
-                    <?= Validator::getErrorForField('type') ?>
-                </p>
-            </div>
-        </div>
         <div id="productHTML">
         </div>
-        <small id="productInfo"></small>   
+        <small id="productInfo" style="font-weight: bold;"></small>
     </form>
 
 </div>
@@ -98,4 +91,3 @@ var_dump(isset($_SESSION['errors']));
 <?php
 
 require_once "includes/footer.php";
-?>
