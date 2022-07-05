@@ -16,7 +16,6 @@ class Validator
 
     private $validation_rules;
 
-
     private $messages = [
         "required"  => "Please, submit required data",
         "number"    =>  "Please, provide the data of ",
@@ -33,8 +32,6 @@ class Validator
 
     public function validate()
     {
-        //    var_dump($this->validation_rules);
-
         foreach ($this->validation_rules as $field => $rule) {
             $field_value = $this->getFieldValue($field);
             $rule = ucfirst($rule);
@@ -46,8 +43,6 @@ class Validator
                 $this->addError($resultant_message, $field);
             }
         }
-        //   die();
-
     }
 
     public function getFieldValue($field)
@@ -73,7 +68,6 @@ class Validator
 
                     return $this->messages['number'] . $field . " (number must be greater than 1)";
                 }
-                // var_dump($value); die();
                 return preg_match("/^[0-9]*$/", $value) ? $this->no_error : $this->messages['number'] . $field . " (number must be greater than 1)";
             } catch (Exception $e) {
                 return preg_match("/^[0-9]*$/", $value) ? $this->no_error : $this->messages['required'] . $field . " (number must be greater than 1)";
