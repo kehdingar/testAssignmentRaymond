@@ -74,7 +74,7 @@ class Validator{
     }
    }
 
-   public function validateSwitcher($value)
+   public function validateType($value)
    {
        if($value == ""){
            return $this->messages['required'];

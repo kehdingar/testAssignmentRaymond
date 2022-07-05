@@ -5,7 +5,7 @@ class DVDDisc extends Product
 
     protected int $size = 0;
     private string $sizeUnit = "MB";
-    public static string $name = "DVD-disk";
+    public static string $displayName = "DVD-disk";
 
 
     public function __construct()
@@ -44,11 +44,20 @@ class DVDDisc extends Product
         return $this->generatedFields;
     }
 
-    public static function getName(): string
+    public static function getDisplayName(): string
     {
-        return self::$name;
+        return self::$displayName;
     }
 
+    public function setSize($size)
+    {
+        $this->size = $size;
+    }
+
+    public function getSize(): int
+    {
+        return $this->size;
+    }
     
 
 }

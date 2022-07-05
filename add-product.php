@@ -68,7 +68,7 @@ var_dump(isset($_SESSION['errors']));
             <div class="form-group">
                 <div class="col-md-12">
                     <label>Type Switcher</label>
-                    <select id="productType" name="switcher">
+                    <select id="productType" name="type">
                         <option value="">Type Switcher</option>
 
                         <?php
@@ -76,14 +76,14 @@ var_dump(isset($_SESSION['errors']));
                         foreach (Product::getChildren() as $type) 
                         {
                              ?>
-                              <option value="<?php echo $type?>"><?php echo call_user_func($type. "::getName"); ?></option>
+                              <option value="<?php echo $type?>"><?php echo call_user_func($type. "::getDisplayName"); ?></option>
                         <?php 
                         }
                         ?>
                     </select>
                 </div>
-                <p id="switcherError" class="error">
-                    <?= Validator::getErrorForField('switcher') ?>
+                <p id="typeError" class="error">
+                    <?= Validator::getErrorForField('type') ?>
                 </p>
             </div>
         </div>

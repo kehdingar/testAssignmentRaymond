@@ -8,7 +8,7 @@ class Furniture extends Product
     private string $heightUnit = "CM";
     private string $widthUnit = "CM";
     private string $lengthUnit = "CM";
-    private static string $name = "Furniture";
+    private static string $displayName = "Furniture";
 
 
     public function __construct()
@@ -62,11 +62,40 @@ class Furniture extends Product
         return "Please, Dimensions: LxWxH " .$this->lengthUnit;
     }
 
-    public static function getName(): string
+    public static function getDisplayName(): string
     {
-        return self::$name;
+        return self::$displayName;
     }
 
+    public function setHeight($height)
+    {
+        $this->height = $height;
+    }
+
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    public function setWidth($width)
+    {
+        $this->width = $width;
+    }
+
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    public function setLength($length)
+    {
+        $this->length = $length;
+    }
+
+    public function getLength(): int
+    {
+        return $this->length;
+    }
     
 
 }

@@ -7,7 +7,7 @@ class Book extends Product
 {
     protected int $weight = 0;
     private string $weightUnit = "Kg";
-    private static string  $name = "Book";
+    private static string  $displayName = "Book";
     protected array $formFields = array();
     // private string $generatedFields = "";
 
@@ -55,11 +55,15 @@ class Book extends Product
         return $this->generatedFields;
     }
 
-    public static function getName(): string
+    public static function getDisplayName(): string
     {
-        return self::$name;
+        return self::$displayName;
     }
 
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+    }
     public function getWeight(): int
     {
         return $this->weight;

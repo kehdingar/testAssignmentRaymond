@@ -1,6 +1,10 @@
 <?php
 
 require_once "Product.php";
+require_once "DVDDisc.php";
+require_once "Book.php";
+require_once "Furniture.php";
+require_once "Crud.php";
 
 class ProductController
 {
@@ -34,28 +38,30 @@ class ProductController
 
     public function addProduct(){
         $this->validationRules = [
-            'switcher' => 'switcher',
+            'type' => 'type',
             'sku' => 'required',
             'name' => 'required',
             'price' => 'number'
         ];
 
-        $switcher = $_POST['switcher'];
+        $type = $_POST['type'];
+
+        
 
         // Keys matching database columns
         $this->productData = [
             'sku' => $_POST['sku'],
             'name' => $_POST['name'],
             'price' => $_POST['price'],
-            'switcher' => $switcher,
+            'type' => $type,
         ];
 
 
         $this->validation_data = $this->productData;
         // array_push($validation_data,['switcher' => $switcher]);
-        if(isset($switcher) && in_array($switcher,Product::getChildren())){
-            $this->setType(new $switcher);
-            $productMethodToCall = "add$switcher";
+        if(isset($type) && in_array($type,Product::getChildren())){
+            $this->setType(new $type);
+            $productMethodToCall = "add$type";
             $productTypeData = $this->$productMethodToCall();
 
             $this->validation_data += $productTypeData;
@@ -78,7 +84,8 @@ class ProductController
         $validator->validate();
 
         if($validator->validates()){
-            $response = $_SESSION;
+            
+            // $this->crud->create($this->productData,'products')
             // echo json_encode($response);
             // header('location:add-product.php');
             die("No Error");

@@ -14,17 +14,17 @@ abstract class Product
         "string" => "text"
     );
 
-    private string $sku;
-    private string $name;
-    private int $price;
-    private string $typeSwitcher;
+    private static string $sku;
+    private static string $name;
+    private static int $price;
+    private static string $type;
 
 
     public abstract function getFormFieldInfo($field): string;
 
     public abstract function getFieldsInfo(): array;
 
-    public abstract static function getName(): string;
+    public abstract static function getDisplayName(): string;
 
     public abstract function generatedFields(): string;
    
@@ -65,6 +65,46 @@ abstract class Product
             }
         }
         return $types;
+    }
+
+    public static function setSku($sku)
+    {
+        self::$sku = $sku;
+    }
+
+    public static function getSku()
+    {
+        return self::$sku;
+    }
+
+    public static function setName($name)
+    {
+        self::$name = $name;
+    }
+
+    public static function getName()
+    {
+        return self::$name;
+    }
+
+    public static function setPrice($price)
+    {
+        self::$price = $price;
+    }
+
+    public static function getPrice()
+    {
+        return self::$price;
+    }
+
+    public static function setType($type)
+    {
+        self::$type = $type;
+    }
+
+    public static function getType()
+    {
+        return self::$type;
     }
 
  
