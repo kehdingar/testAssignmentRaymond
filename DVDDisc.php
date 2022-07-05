@@ -51,7 +51,13 @@ class DVDDisc extends Product
 
     public function setSize($size)
     {
-        $this->size = $size;
+        if($size == null){
+            
+            $this->size = 0;
+        }else{
+
+            $this->size = $size;
+        }
     }
 
     public function getSize(): int

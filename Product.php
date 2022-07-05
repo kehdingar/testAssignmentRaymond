@@ -82,17 +82,23 @@ abstract class Product
         self::$name = $name;
     }
 
-    public static function getName()
+    public static function getName(): string
     {
         return self::$name;
     }
 
     public static function setPrice($price)
     {
-        self::$price = $price;
+        if($price == null){
+
+            self::$price = 0;
+        }else{
+
+            self::$price = $price;
+        }
     }
 
-    public static function getPrice()
+    public static function getPrice(): int
     {
         return self::$price;
     }
@@ -102,7 +108,7 @@ abstract class Product
         self::$type = $type;
     }
 
-    public static function getType()
+    public static function getType(): string
     {
         return self::$type;
     }

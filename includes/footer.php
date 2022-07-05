@@ -15,7 +15,7 @@
             $.ajax({
                 type:'GET',
                 url:`process-add-product.php?selectedType=${selectedType}`,
-                dataType:'JSON',
+                dataType:'json',
                 success:function(response){
                     if(!response.empty){
 
@@ -59,7 +59,7 @@
             $.ajax({
                 type:'POST',
                 url:`process-add-product.php`,
-                dataType: 'JSON',
+                dataType: 'json',
                 data: $('form').serialize(),
                 success:function(response){
                     // console.log(Object.entries(response));

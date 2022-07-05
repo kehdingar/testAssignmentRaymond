@@ -12,14 +12,10 @@ class Book extends Product
     // private string $generatedFields = "";
 
     public function __construct()
-    {
-        
+    {    
         $this->formFields = [
             "weight" => $this->weightUnit
         ];
-
-        
-
     }
 
     public function generatedFields(): string{
@@ -62,8 +58,13 @@ class Book extends Product
 
     public function setWeight($weight)
     {
-        $this->weight = $weight;
+        if($weight == null){
+            $this->weight = 0;
+        }else{
+            $this->weight = $weight;
+        }
     }
+
     public function getWeight(): int
     {
         return $this->weight;

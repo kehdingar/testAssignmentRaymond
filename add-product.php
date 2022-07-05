@@ -16,7 +16,7 @@ var_dump(isset($_SESSION['errors']));
 
 
 ?>
-<form class="logregform" method="POST" action="">
+<form class="logregform" method="POST">
 
 <header>
     <p><?php echo "Product Add" ?></p>

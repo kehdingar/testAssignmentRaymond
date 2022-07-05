@@ -69,7 +69,13 @@ class Furniture extends Product
 
     public function setHeight($height)
     {
-        $this->height = $height;
+        if($height == null){
+
+            $this->height = 0;
+        }else{
+
+            $this->height = $height;
+        }
     }
 
     public function getHeight(): int
@@ -79,7 +85,13 @@ class Furniture extends Product
 
     public function setWidth($width)
     {
-        $this->width = $width;
+        if($width == null){
+
+            $this->width = 0;
+        }else{
+
+            $this->width = $width;
+        }
     }
 
     public function getWidth(): int
@@ -89,7 +101,13 @@ class Furniture extends Product
 
     public function setLength($length)
     {
-        $this->length = $length;
+        if($length == null){
+
+            $this->length = 0;
+        }else{
+
+            $this->length = $length;
+        }
     }
 
     public function getLength(): int

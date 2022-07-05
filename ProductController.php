@@ -18,7 +18,8 @@ class ProductController
 
 
 
-    public function setType(Product $type){
+    public function setType(Product $type)
+    {
         return $this->type = $type;
     }
 
@@ -28,15 +29,19 @@ class ProductController
     }
     
 
-    public function getProductHTML(){
+    public function getProductHTML()
+    {
        return $this->type->generatedFields();
     }
 
-    public function getFieldsInfo(){
+    public function getFieldsInfo()
+    {
         return $this->type->getFieldsInfo();
     }
 
-    public function addProduct(){
+    public function addProduct()
+    {
+
         $this->validationRules = [
             'type' => 'type',
             'sku' => 'required',
@@ -44,22 +49,28 @@ class ProductController
             'price' => 'number'
         ];
 
-        $type = $_POST['type'];
+        // $type = $_POST['type'];
+        // var_dump($_POST['sku']);
+        // die();
 
+        Product::setType($_POST['type']);
+        Product::setName($_POST['name']);
+        Product::setSku($_POST['sku']);
+        Product::setPrice(json_decode($_POST['price']),true);
         
-
         // Keys matching database columns
         $this->productData = [
-            'sku' => $_POST['sku'],
-            'name' => $_POST['name'],
-            'price' => $_POST['price'],
-            'type' => $type,
+            'sku' => Product::getSku(),
+            'name' => Product::getName(),
+            'price' => Product::getPrice(),
+            'type' => Product::getType(),
         ];
 
 
         $this->validation_data = $this->productData;
         // array_push($validation_data,['switcher' => $switcher]);
-        if(isset($type) && in_array($type,Product::getChildren())){
+        if(Product::getType() != '' && in_array(Product::getType(),Product::getChildren())){
+            $type = Product::getType();
             $this->setType(new $type);
             $productMethodToCall = "add$type";
             $productTypeData = $this->$productMethodToCall();
@@ -100,42 +111,51 @@ class ProductController
     }
 
     public function addBook(){
-        $this->bookData += [
-            'weight' => $_POST['weight']
-        ];
+
+        $book = new Book();
+
+        $book->setWeight(json_decode($_POST['weight']),true);
+
+        $this->bookData += ['weight' => $book->getWeight()];
 
         // array_push($this->bookData,[
         //     'weight' => $_POST['weight']
         // ] );
 
-        $this->validationRules += [
-            'weight' => 'number'
-        ];
+        $this->validationRules += ['weight' => 'number'];
 
         return $this->bookData;
 
     }
 
     public function addDVDDisc(){
-        $this->dvdDiscData +=  [
-            'size' => $_POST['size']
-        ];
 
-        $this->validationRules +=  [
-            'size' => 'number'
-        ];
+        $dvdDisc = new DVDDisc();
+
+        $dvdDisc->setSize(json_decode($_POST['size']),true);
+
+        $this->dvdDiscData += ['size' => $dvdDisc->getSize()];
+
+        $this->validationRules += ['size' => 'number'];
 
         return $this->dvdDiscData;
 
     }
 
     public function addFurniture(){
-        $this->furnitureData += ['height' => $_POST['height']];
-        $this->furnitureData  += ['width' => $_POST['width']];
-        $this->furnitureData  += ['length' => $_POST['length']];
 
-        $this->validationRules  += ['height' => 'number'];
-        $this->validationRules  += ['width' => 'number'];
+        $furniture = new Furniture();
+        
+        $furniture->setHeight(json_decode($_POST['height']),true);
+        $furniture->setWidth(json_decode($_POST['width']),true);
+        $furniture->setLength(json_decode($_POST['length']),true);
+
+        $this->furnitureData += ['height' => $furniture->getHeight()];
+        $this->furnitureData += ['width' => $furniture->getWidth()];
+        $this->furnitureData += ['length' => $furniture->getLength()];
+
+        $this->validationRules += ['height' => 'number'];
+        $this->validationRules += ['width' => 'number'];
         $this->validationRules += ['length' => 'number'];
 
         return $this->furnitureData;
