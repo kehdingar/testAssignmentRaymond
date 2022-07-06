@@ -1,6 +1,6 @@
 <?php
 
-class DVDDisc extends Product
+class DVD extends Product
 {
 
     protected int $size = 0;

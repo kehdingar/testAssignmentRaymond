@@ -1,7 +1,7 @@
 <?php
 
 require_once "Product.php";
-require_once "DVDDisc.php";
+require_once "DVD.php";
 require_once "Book.php";
 require_once "Furniture.php";
 include_once "Crud.php";
@@ -111,10 +111,10 @@ class ProductController
         return $this->bookData;
     }
 
-    public function addDVDDisc()
+    public function addDVD()
     {
 
-        $dvdDisc = new DVDDisc();
+        $dvdDisc = new DVD();
 
         $dvdDisc->setSize(json_decode($_POST['size']), true);
 
@@ -152,7 +152,7 @@ class ProductController
         $this->crud->create($this->bookData, 'book');
     }
 
-    public function createDVDDisc($productId)
+    public function createDVD($productId)
     {
         $this->dvdDiscData += ['product_id' => $productId];
         $this->crud->create($this->dvdDiscData, 'dvd_disc');

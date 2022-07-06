@@ -8,7 +8,7 @@ require_once "ListProducts.php";
     <span><?php echo "Product List" ?></span>
     <div id="rightMenu">
         <a href="add-product.php" class="add">ADD</a>
-        <a href="#" class="mass-delete button-two">MASS DELETE</a>
+        <a href="#" class="mass-delete button-two delete-checkbox">MASS DELETE</a>
     </div>
 </header>
 
@@ -24,7 +24,7 @@ require_once "ListProducts.php";
             <div class="card" style="width: 18rem;">
                 <div class="card-body product-list">
                     <div>
-                        <input class="form-check-input .delete-checkbox" type="checkbox" name="product[]" id="checkbox" value="<?php echo $product['id'] ?>" aria-label="...">
+                        <input class="form-check-input" type="checkbox" name="product[]" id="checkbox" value="<?php echo $product['id'] ?>" aria-label="...">
                     </div>
                     <p><?php echo $product['sku'] ?></p>
                     <p><?php echo $product['name'] ?></p>

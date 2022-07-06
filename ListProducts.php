@@ -1,7 +1,7 @@
 <?php
 include_once "Crud.php";
 require_once "Product.php";
-require_once "DVDDisc.php";
+require_once "DVD.php";
 require_once "Book.php";
 
 class ListProducts
@@ -18,7 +18,7 @@ class ListProducts
     public function displayProducts()
     {
         $book = new Book();
-        $dvdDisc = new DVDDisc();
+        $dvdDisc = new DVD();
 
         $weightUnit = $book->getWeightUnit();
         $sizeUnit = $dvdDisc->getSizeUnit();

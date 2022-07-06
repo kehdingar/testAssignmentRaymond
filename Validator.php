@@ -1,7 +1,7 @@
 <?php
 include_once 'Session.php';
 include_once 'Product.php';
-include_once 'DVDDisc.php';
+include_once 'DVD.php';
 include_once 'Furniture.php';
 include_once 'Crud.php';
 include_once 'Book.php';

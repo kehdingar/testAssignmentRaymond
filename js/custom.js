@@ -69,7 +69,7 @@ $(document).ready(function() {
 
     });
 
-    $(".mass-delete").click(function(e) {
+    $(".delete-checkbox").click(function(e) {
         console.log("We are about to submit")
         e.preventDefault();
         $.ajax({

@@ -42,6 +42,7 @@ body {
 #rightMenu .add {
   position: relative;
   overflow: hidden;
+  cursor: pointer;
   background-color: #2a343e;
   font-weight: bold;
   border: 2px solid #2a343e;
@@ -208,6 +209,14 @@ form .form-control-checkbox:focus {
 }
 
 
+@media (max-width: 1296px) {
+  .products{
+    justify-content: center;
+  }
+
+}
+
+
 @media (max-width: 703px) {
   header span {
     font-size: 1.5rem;
@@ -228,6 +237,20 @@ form .form-control-checkbox:focus {
   }
 }
 
+@media (max-width: 461px) {
+  header span {
+    margin-right: 6px;
+  }
+
+  #rightMenu .add {
+    margin-left: 0;
+  }
+
+  #rightMenu .cancel {
+    margin-left: 0;
+  }
+
+}
 @media (max-width: 419px) {
   header span {
     margin-right: 6px;
