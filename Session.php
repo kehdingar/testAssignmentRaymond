@@ -2,10 +2,8 @@
 
 class Session
 {
-
     public static function start()
     {
-
         if (empty($_SESSION)) session_start();
     }
 
@@ -17,7 +15,6 @@ class Session
 
     public static function get($session_name)
     {
-
         if (isset($_SESSION[$session_name])) {
 
             return $_SESSION[$session_name];
@@ -29,7 +26,6 @@ class Session
 
     public static function destroy($session_name)
     {
-
         if (isset($_SESSION[$session_name])) {
 
             unset($_SESSION[$session_name]);
@@ -38,7 +34,6 @@ class Session
 
     public static function exists($session_name)
     {
-
         if (!isset($_SESSION[$session_name])) return false;
 
         return true;

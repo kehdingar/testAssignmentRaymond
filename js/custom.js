@@ -1,14 +1,7 @@
 $(document).ready(function() {
 
-    // if($('.products.prodcut-area').children().length == 0){
-    //     $('.delete-checkbox').css("visibility","hidden");
-
-    // }else{
-    //     $('span.btn-two').append('<a href="#" class="mass-delete button-two delete-checkbox">MASS DELETE</a>');
-    // }
-
     $("#productType").change(function() {
-        console.log(($(this).val()));
+
         let selectedType = $(this).val();
 
         $.ajax({
@@ -18,24 +11,17 @@ $(document).ready(function() {
             success: function(response) {
                 if (!response.empty) {
 
-                    console.log("Success");
-                    console.log(response.html);
-                    console.log(response.info);
                     $("#productHTML").html(response.html);
 
                     let infoHTML = "";
-
                     infoHTML = response.info;
 
                     $("#productInfo").html(infoHTML);
                 } else {
                     $("#productHTML").empty();
                     $("#productInfo").empty();
-
                 }
-
             },
-
             error: function(response) {
             }
 
@@ -45,7 +31,7 @@ $(document).ready(function() {
 
 
     $(".save").click(function(e) {
-        console.log("We are about to submit")
+
         e.preventDefault();
         $('p.error').html("");
 
@@ -61,13 +47,9 @@ $(document).ready(function() {
                     if (response['errors'] != undefined || response['errors'] != null)
                         Object.entries(response['errors']).forEach(([key, value]) => {
                             $(`#${key}Error`).html(value);
-                            console.log(key);
-                            console.log(value);
                         });
                 }
-
             },
-
             error: function(response) {
             }
 
@@ -77,7 +59,7 @@ $(document).ready(function() {
     });
 
     $(".mass-delete").click(function(e) {
-        console.log("We are about to submit")
+        
         e.preventDefault();
         $.ajax({
             type: 'POST',
@@ -86,31 +68,12 @@ $(document).ready(function() {
             data: $('#productListForm').serialize(),
             success: function(response) {
                 if (response != "empty") {
-                    if(response == "data"){
-
-                        $('.products.prodcut-area').load('list-products.php .products.prodcut-area', function() {
-    
-                        });
-                    }else{
-                        $('.delete-checkbox').remove();
-                        $('.products.prodcut-area').load('list-products.php .products.prodcut-area', function() {
-    
-                        });
-
-                    }
-                    
-                    // window.location.href = "list-products.php"
+                    window.location.href = "list-products.php"    
                 }
-
             },
-
             error: function(response) {
             }
-
-
         });
-
     });
-
 
 });

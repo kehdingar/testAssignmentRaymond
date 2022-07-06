@@ -22,13 +22,10 @@ class Book extends Product
         return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
 
-
-
     public function getdescriptionMessage(): string
     {
         return "Please, provide weight in " . $this->weightUnit;
     }
-
 
     public function getFormFields(): array
     {

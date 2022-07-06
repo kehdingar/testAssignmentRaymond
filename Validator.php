@@ -8,7 +8,6 @@ include_once 'Book.php';
 
 class Validator
 {
-
     private $data;
     private $crud;
     private $errors = [];
@@ -16,7 +15,7 @@ class Validator
 
     private $validation_rules;
 
-    // errror messages to display for errors
+    // errror messages
     private $messages = [
         "required"  => "Please, submit required data",
         "number"    =>  "Please, provide the data of ",
@@ -88,7 +87,6 @@ class Validator
 
     public function validateSku($value, $field)
     {
-
         if ($value == "") {
             return $this->messages['required'];
         }
@@ -124,7 +122,6 @@ class Validator
 
     public function validates()
     {
-
         return empty($this->errors);
     }
 }

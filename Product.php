@@ -17,26 +17,28 @@ abstract class Product
     private static float $price;
     private static string $type;
 
-
     public abstract function getdescriptionMessage(): string;
 
     public abstract static function getDisplayName(): string;
 
     public abstract function generatedFields(): string;
 
-
+    
     public function fieldGenerator(array $formFields): string
     {
         foreach ($formFields as $field => $unit) {
             if (!empty($unit)) {
 
-                $this->generatedFields .= '<div class="form-group row">' . '<label class="col-md-1 col-form-label">' . ucfirst($field) . ' (' . $unit . ')</label>' . "\n";
+                $this->generatedFields .= '<div class="form-group row">' . '<label class="col-md-1 col-form-label">' . 
+                                        ucfirst($field) . ' (' . $unit . ')</label>' . "\n";
             } else {
 
-                $this->generatedFields .= '<div class="form-group">' . '<label class="col-md-1 col-form-label">' . ucfirst($field) . '</label>' . "\n";
+                $this->generatedFields .= '<div class="form-group">' . '<label class="col-md-1 col-form-label">' . 
+                                        ucfirst($field) . '</label>' . "\n";
             }
-            $this->generatedFields .= '<div class="col-md-4"><input class="form-control" type="' . $this->inputMapper($field) . '" id="' . $field . '" name="' . $field . '" value="' . $field . '"/>' . "</div></div>\n";
-            $this->generatedFields .= '<p id="' . $field . 'Error" class="error">' . Validator::getErrorForField($field) . "</p>\n";
+            $this->generatedFields .= '<div class="col-md-4"><input class="form-control" type="' . $this->inputMapper($field) . 
+                                    '" id="' . $field . '" name="' . $field . '" value="' . $field . '"/>' . 
+                                    '<p id="' . $field . 'Error" class="error">' . Validator::getErrorForField($field) . "</p>\n"."</div>.</div>\n";
         }
         return $this->generatedFields;
     }

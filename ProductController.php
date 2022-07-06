@@ -34,7 +34,6 @@ class ProductController
         return $this->type;
     }
 
-
     public function getProductHTML()
     {
         return $this->type->generatedFields();
@@ -47,7 +46,7 @@ class ProductController
 
     public function addProduct()
     {
-        // values match second part of camel case validation method names in Validator.php
+        // associative array values match second part of camel case validation method names in Validator.php
         $this->validationRules = [
             'type' => 'type',
             'sku' => 'sku',
@@ -55,13 +54,12 @@ class ProductController
             'price' => 'number'
         ];
 
-
         Product::setType($_POST['type']);
         Product::setName($_POST['name']);
         Product::setSku($_POST['sku']);
         Product::setPrice(json_decode($_POST['price']), true);
 
-        // Keys matching database columns
+        // associative array keys matching database columns
         $this->productData = [
             'sku' => Product::getSku(),
             'name' => Product::getName(),
@@ -71,9 +69,13 @@ class ProductController
 
 
         $this->validation_data = $this->productData;
+
+        // checking and calling the appropriate method for the product type that extends Product class
         if (Product::getType() != '' && in_array(Product::getType(), Product::getChildren())) {
             $type = Product::getType();
             $this->setType(new $type);
+
+            // set up and call appropirate method
             $productMethodToCall = "add$type";
             $productTypeData = $this->$productMethodToCall();
 
@@ -84,11 +86,13 @@ class ProductController
         $validator->validate();
 
         if ($validator->validates()) {
-
-            $productID = $this->crud->create($this->productData, 'product');
+            // insert product in database
+            $lastId = $this->crud->create($this->productData, 'product');
             $productType = Product::getType();
             $queryMethod = "create$productType";
-            $this->$queryMethod($productID);
+            $this->$queryMethod($lastId);
+
+            // message to ajax caller
             $response = "redirect";
             echo json_encode($response);
         } else {
@@ -99,7 +103,6 @@ class ProductController
 
     public function addBook()
     {
-
         $book = new Book();
 
         $book->setWeight(json_decode($_POST['weight']), true);
@@ -113,7 +116,6 @@ class ProductController
 
     public function addDVD()
     {
-
         $dvdDisc = new DVD();
 
         $dvdDisc->setSize(json_decode($_POST['size']), true);
@@ -127,7 +129,6 @@ class ProductController
 
     public function addFurniture()
     {
-
         $furniture = new Furniture();
 
         $furniture->setHeight(json_decode($_POST['height']), true);
@@ -182,4 +183,5 @@ class ProductController
             $this->crud->delete($sql);
         }
     }
+
 }

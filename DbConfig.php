@@ -2,7 +2,6 @@
 
 class DbConfig
 {
-
     function getDbConnection()
     {
         $servername = "localhost";

@@ -42,10 +42,10 @@ body {
 #rightMenu .button-one {
   position: relative;
   overflow: hidden;
-  cursor: pointer;
   background-color: #2a343e;
   font-weight: bold;
   border: 2px solid #2a343e;
+  color: white;
   transition: background-color 0.3s ease-out;
 
 }
@@ -67,8 +67,8 @@ body {
 }
 
 #rightMenu .button-one:hover {
-  color: #2a343e;
   background-color: white;
+  color: #2a343e;
   font-weight: bold;
 }
 
@@ -196,6 +196,8 @@ p.error {
 
 .prodcut-area {
   padding: 10px 0 0.6rem 0;
+  margin-top: 20px;
+
 }
 
 form .form-control:focus {

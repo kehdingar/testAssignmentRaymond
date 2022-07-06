@@ -8,14 +8,8 @@ require_once "ListProducts.php";
     <span><?php echo "Product List" ?></span>
     <div id="rightMenu">
         <a href="add-product.php" class="add button-one">ADD</a>
-        <?php 
-            $crud = new Crud();
-            $row = $crud->read("SELECT * FROM product LIMIT 1");
-            if($row){?>
-                <a href="#" class="mass-delete button-two" id="delete-product-btn">MASS DELETE</a>
+        <a href="#" class="mass-delete button-two" id="delete-product-btn">MASS DELETE</a>
 
-           <?php }
-        ?>
     </div>
 </header>
 

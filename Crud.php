@@ -5,8 +5,7 @@ class Crud
 {
     private $conn;
     public function __construct()
-    {
-        
+    {    
         $connection = new DbConfig(); 
         $this->conn = $connection->getDbConnection();
     }

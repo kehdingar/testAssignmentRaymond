@@ -12,17 +12,16 @@ class ListProducts
     public function __construct()
     {
         $this->crud = new Crud();
-        $this->queryResults = $this->displayProducts();
+        $this->queryResults = $this->queryProducts();
     }
 
-    public function displayProducts()
+    public function queryProducts()
     {
         $book = new Book();
         $dvdDisc = new DVD();
 
         $weightUnit = $book->getWeightUnit();
         $sizeUnit = $dvdDisc->getSizeUnit();
-
 
         $query = "SELECT p.id,sku,name,CONCAT_WS('.00 $',price,'') price,CONCAT_WS(' $weightUnit',weight,'') weight,
                     CONCAT_WS(' $sizeUnit',size,'') size, CONCAT_WS('x',height,width,length) dimensions,type   
@@ -45,3 +44,4 @@ class ListProducts
         return $this->queryResults;
     }
 }
+

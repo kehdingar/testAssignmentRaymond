@@ -2,7 +2,6 @@
 
 class DVD extends Product
 {
-
     protected int $size = 0;
     private string $sizeUnit = "MB";
     public static string $displayName = "DVD-disk";
@@ -19,7 +18,6 @@ class DVD extends Product
         // fieldGenerator() in Parent
         return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
-
 
     public function getdescriptionMessage(): string
     {

@@ -6,7 +6,6 @@ require_once "Furniture.php";
 require_once "Book.php";
 Session::start();
 
-
 $productController = new ProductController();
 
 if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
@@ -17,8 +16,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
     unset($_SESSION['errors']);
 } else {
     if (isset($_GET['selectedType']) && !empty($_GET['selectedType'])) {
-
-
         $productController->setType(new $_GET['selectedType']);
 
         $productType = $productController->getType();

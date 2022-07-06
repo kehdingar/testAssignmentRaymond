@@ -16,7 +16,7 @@ require_once "includes/header.php";
 <header>
     <span><?php echo "Product Add" ?></span>
     <div id="rightMenu">
-        <button class="save button-one">Save</button>
+        <a href="#" class="save button-one">Save</a>
         <a href="list-products.php" class="button-two">Cancel</a>
     </div>
 </header>
@@ -28,31 +28,31 @@ require_once "includes/header.php";
             <label class="col-md-1 col-form-label">SKU</label>
             <div class="col-md-4">
                 <input type="text" name="sku" id="sku" value="" class="form-control">
+                <p id="skuError" class="error">
+                    <?= Validator::getErrorForField('sku') ?>
+                </p>
             </div>
-            <p id="skuError" class="error">
-                <?= Validator::getErrorForField('sku') ?>
-            </p>
         </div>
 
         <div class="form-group row">
             <label class="col-md-1 col-form-label">Name</label>
             <div class="col-md-4">
                 <input type="text" name="name" id="name" value="" class="form-control">
+                <p id="nameError" class="error">
+                    <?= Validator::getErrorForField('name') ?>
+                </p>
             </div>
-            <p id="nameError" class="error">
-                <?= Validator::getErrorForField('name') ?>
-            </p>
         </div>
 
         <div class="form-group row">
             <label class="col-md-1 col-form-label">Price ($)</label>
             <div class="col-md-4">
                 <input type="number" name="price" id="price" value="" class="form-control">
+                <p id="priceError" class="error ">
+                    <?= Validator::getErrorForField('price') ?>
+                </p>
             </div>
 
-            <p id="priceError" class="error ">
-                <?= Validator::getErrorForField('price') ?>
-            </p>
         </div>
 
         <div class="input-group mb-8">
@@ -73,12 +73,12 @@ require_once "includes/header.php";
                     }
                     ?>
                 </select>
+                <p id="typeError" class="error">
+                    <?= Validator::getErrorForField('type') ?>
+                </p>
             </div>
         </div>
 
-        <p id="typeError" class="error">
-            <?= Validator::getErrorForField('type') ?>
-        </p>
 
         <div id="productHTML">
         </div>
