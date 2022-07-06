@@ -22,7 +22,7 @@ class Furniture extends Product
 
     public function generatedFields(): string
     {
-        // Generated fields in Parent
+        // fieldGenerator() in Parent
         return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
 
@@ -43,13 +43,7 @@ class Furniture extends Product
 
     public function setHeight($height)
     {
-        if ($height == null) {
-
-            $this->height = 0;
-        } else {
-
-            $this->height = $height;
-        }
+        $height == null ? $this->height = 0 : $this->height = $height;
     }
 
     public function getHeight(): int
@@ -59,13 +53,7 @@ class Furniture extends Product
 
     public function setWidth($width)
     {
-        if ($width == null) {
-
-            $this->width = 0;
-        } else {
-
-            $this->width = $width;
-        }
+        $width == null ? $this->width = 0 : $this->width = $width;
     }
 
     public function getWidth(): int
@@ -75,13 +63,7 @@ class Furniture extends Product
 
     public function setLength($length)
     {
-        if ($length == null) {
-
-            $this->length = 0;
-        } else {
-
-            $this->length = $length;
-        }
+        $length == null ? $this->length = 0 : $this->length = $length;
     }
 
     public function getLength(): int

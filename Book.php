@@ -18,7 +18,7 @@ class Book extends Product
 
     public function generatedFields(): string
     {
-        // Generated fields in Parent
+        // fieldGenerator() in Parent
         return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
 
@@ -47,11 +47,7 @@ class Book extends Product
 
     public function setWeight($weight)
     {
-        if ($weight == null) {
-            $this->weight = 0;
-        } else {
-            $this->weight = $weight;
-        }
+        $weight == null ? $this->weight = 0 : $this->weight = $weight;
     }
 
     public function getWeight(): int

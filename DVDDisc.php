@@ -16,7 +16,7 @@ class DVDDisc extends Product
 
     public function generatedFields(): string
     {
-        // Generated fields in Parent
+        // fieldGenerator() in Parent
         return $this->generatedFields = $this->fieldGenerator($this->formFields);
     }
 
@@ -38,13 +38,7 @@ class DVDDisc extends Product
 
     public function setSize($size)
     {
-        if ($size == null) {
-
-            $this->size = 0;
-        } else {
-
-            $this->size = $size;
-        }
+        $size == null ? $this->size = 0 : $this->size = $size;
     }
 
     public function getSize(): int

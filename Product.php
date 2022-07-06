@@ -1,5 +1,7 @@
 <?php
 require_once "Validator.php";
+require_once "ProductController.php";
+
 
 abstract class Product
 {
@@ -100,4 +102,5 @@ abstract class Product
     {
         return self::$type;
     }
+
 }

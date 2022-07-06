@@ -47,7 +47,7 @@ class ProductController
 
     public function addProduct()
     {
-
+        // values match second part of camel case validation method names in Validator.php
         $this->validationRules = [
             'type' => 'type',
             'sku' => 'sku',

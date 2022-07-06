@@ -16,6 +16,7 @@ class Validator
 
     private $validation_rules;
 
+    // errror messages to display for errors
     private $messages = [
         "required"  => "Please, submit required data",
         "number"    =>  "Please, provide the data of ",

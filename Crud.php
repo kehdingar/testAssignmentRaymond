@@ -6,7 +6,9 @@ class Crud
     private $conn;
     public function __construct()
     {
-        $this->conn = getDbConnection();
+        
+        $connection = new DbConfig(); 
+        $this->conn = $connection->getDbConnection();
     }
 
     public function create($dataArray, $table)
