@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    // if($('.products.prodcut-area').children().length == 0){
+    //     $('.delete-checkbox').css("visibility","hidden");
+
+    // }else{
+    //     $('span.btn-two').append('<a href="#" class="mass-delete button-two delete-checkbox">MASS DELETE</a>');
+    // }
+
     $("#productType").change(function() {
         console.log(($(this).val()));
         let selectedType = $(this).val();
@@ -69,7 +76,7 @@ $(document).ready(function() {
 
     });
 
-    $(".delete-checkbox").click(function(e) {
+    $(".mass-delete").click(function(e) {
         console.log("We are about to submit")
         e.preventDefault();
         $.ajax({
@@ -79,7 +86,20 @@ $(document).ready(function() {
             data: $('#productListForm').serialize(),
             success: function(response) {
                 if (response != "empty") {
-                    window.location.href = "list-products.php"
+                    if(response == "data"){
+
+                        $('.products.prodcut-area').load('list-products.php .products.prodcut-area', function() {
+    
+                        });
+                    }else{
+                        $('.delete-checkbox').remove();
+                        $('.products.prodcut-area').load('list-products.php .products.prodcut-area', function() {
+    
+                        });
+
+                    }
+                    
+                    // window.location.href = "list-products.php"
                 }
 
             },

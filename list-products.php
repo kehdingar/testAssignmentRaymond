@@ -7,8 +7,15 @@ require_once "ListProducts.php";
 <header>
     <span><?php echo "Product List" ?></span>
     <div id="rightMenu">
-        <a href="add-product.php" class="add">ADD</a>
-        <a href="#" class="mass-delete button-two delete-checkbox">MASS DELETE</a>
+        <a href="add-product.php" class="add button-one">ADD</a>
+        <?php 
+            $crud = new Crud();
+            $row = $crud->read("SELECT * FROM product LIMIT 1");
+            if($row){?>
+                <a href="#" class="mass-delete button-two" id="delete-product-btn">MASS DELETE</a>
+
+           <?php }
+        ?>
     </div>
 </header>
 
@@ -24,7 +31,7 @@ require_once "ListProducts.php";
             <div class="card" style="width: 18rem;">
                 <div class="card-body product-list">
                     <div>
-                        <input class="form-check-input" type="checkbox" name="product[]" id="checkbox" value="<?php echo $product['id'] ?>" aria-label="...">
+                        <input class="form-check-input delete-checkbox" type="checkbox" name="product[]" id="checkbox" value="<?php echo $product['id'] ?>" aria-label="...">
                     </div>
                     <p><?php echo $product['sku'] ?></p>
                     <p><?php echo $product['name'] ?></p>

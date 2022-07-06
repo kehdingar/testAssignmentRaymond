@@ -39,7 +39,7 @@ body {
 }
 
 
-#rightMenu .add {
+#rightMenu .button-one {
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -51,7 +51,7 @@ body {
 }
 
 
-#rightMenu .add::before {
+#rightMenu .button-one::before {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -62,11 +62,11 @@ body {
   transition: border-bottom 0.3s ease;
 }
 
-#rightMenu .add:hover::before {
+#rightMenu .button-one:hover::before {
   border-bottom: 9px solid #2a343e;
 }
 
-#rightMenu .add:hover {
+#rightMenu .button-one:hover {
   color: #2a343e;
   background-color: white;
   font-weight: bold;
@@ -79,6 +79,7 @@ body {
   background-color: #c94242;
   font-weight: bold;
   border: 2px solid #c94242;
+  color: white;
   transition: background-color 0.3s ease-out;
 
 }
@@ -99,18 +100,16 @@ body {
   border-bottom: 9px solid #c94242;
 }
 
+.mass-delete-display{
+  display: none;
+}
+
 
 
 #rightMenu .button-two:hover {
   background-color: #fff;
   color: #c94242;
   font-weight: bold;
-}
-
-.fa-plus:before {
-  content: "\f067";
-  padding-right: 10px !important;
-
 }
 
 .pageWrapper {
@@ -170,19 +169,20 @@ p.error {
 .products {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .product-list {
   font-size: 1rem;
   font-weight: bold;
-  background-color: #fafafa;
+  background-color: #ffffff;
   padding: 2rem 0 2rem 2rem;
   line-height: 1.8rem;
-
   margin: 0 5px 5px 0;
+  padding-right: 20px;
   border-radius: 3px;
-  border: 1px solid rgb(145, 145, 145);
-  box-shadow: 0.2px 0.2px 0px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(231 231 231);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
 
 .product-list :not(.product-list > div) {
@@ -227,7 +227,8 @@ form .form-control-checkbox:focus {
   }
 }
 
-@media (max-width: 444px) {
+
+@media (max-width: 461px) {
   header span {
     font-size: 1.3rem;
   }
@@ -237,12 +238,12 @@ form .form-control-checkbox:focus {
   }
 }
 
-@media (max-width: 461px) {
+@media (max-width: 436px) {
   header span {
     margin-right: 6px;
   }
 
-  #rightMenu .add {
+  #rightMenu .button-one {
     margin-left: 0;
   }
 
@@ -251,24 +252,11 @@ form .form-control-checkbox:focus {
   }
 
 }
-@media (max-width: 419px) {
-  header span {
-    margin-right: 6px;
-  }
 
-  #rightMenu .add {
-    margin-left: 0;
-  }
-
-  #rightMenu .cancel {
-    margin-left: 0;
-  }
-
-}
 
 @media (max-width: 280px) {
 
-  #rightMenu .add {
+  #rightMenu .button-one {
     margin-left: 0;
   }
 

@@ -16,8 +16,8 @@ require_once "includes/header.php";
 <header>
     <span><?php echo "Product Add" ?></span>
     <div id="rightMenu">
-        <a href="#" class="save add">SAVE</a>
-        <a href="list-products.php" class="button-two">CANCEL</a>
+        <button class="save button-one">Save</button>
+        <a href="list-products.php" class="button-two">Cancel</a>
     </div>
 </header>
 
